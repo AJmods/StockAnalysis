@@ -1,9 +1,36 @@
-{% block inputStocks %}<h1>Input Stocks</h1>{% endblock %}
 {%block content %}
-<form action="#" method="POST">
-    <input type="text" name="stock" placeholder="Enter Stock" value=""{{stock if stock}}/>
-    <input type ="date" name = "startDate" placeholder="Enter Start Date" value="" {{startDate if startDate}}/>
-    <input type ="date" name = "endDate" placeholder="Enter End Date" value="" {{endDate if endDate}}/>
-    <input type="submit" value="submit"/>   
-</form>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StockAnalysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: gray;
+            padding-top: 10%;
+        }
+        p    {color: red;}
+        .vstack gap-3{
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body class="text-center">
+    <div class="mx-auto" style="width: 200px;">
+        <form action="#" method="POST">
+        <div class="vstack gap-3">
+            <div><h4>Input Stocks</h4></div>
+            <div>
+                <input type="text" name="stock" class="bg-light border" placeholder="Enter Stock(s)" value=""{{stock if stock}}/>
+            </div>
+            <h5>Start Date:</h5>
+            <input type ="date" name = "startDate" placeholder="Enter Start Date" value="" {{startDate if startDate}}/>
+            <h5>End Date:</h5>
+            <input type ="date" name = "endDate" placeholder="Enter End Date" value="" {{endDate if endDate}}/>
+            <input class="btn btn-primary" type="submit" value="submit"/>
+        </div>
+        </form>
+    </div>
+</body>
 {% endblock %}

@@ -33,11 +33,11 @@ def processStockData(ticker, start_date, end_date):
 
     # get all stock info (slow)
     info = ticker.info
-    print(type(info))
+    #print(type(info)) -> <dict>
     #print(info)
 
     hist = ticker.history(start = start_date, end = end_date)
-    dataOverTime = ticker.history_metadata
+    dataOverTime = ticker.history_metadata # -> <dict> of data over period
     end_price = dataOverTime['regularMarketPrice']
     start_price = dataOverTime['chartPreviousClose']
     percentage_change = math.floor((end_price/start_price - 1.0) * 100)
