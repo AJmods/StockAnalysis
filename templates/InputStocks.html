@@ -1,0 +1,9 @@
+{% block inputStocks %}<h1>Input Stocks</h1>{% endblock %}
+{%block content %}
+<form action="#" method="POST">
+    <input type="text" name="stock" placeholder="Enter Stock" value=""{{stock if stock}}/>
+    <input type ="date" name = "startDate" placeholder="Enter Start Date" value="" {{startDate if startDate}}/>
+    <input type ="date" name = "endDate" placeholder="Enter End Date" value="" {{endDate if endDate}}/>
+    <input type="submit" value="submit"/>   
+</form>
+{% endblock %}

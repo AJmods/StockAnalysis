@@ -13,8 +13,10 @@ def stockAnalysis():
         print(request.form["stock"])
         print(request.form["startDate"])
         print(request.form["endDate"])
-        print(type(request.form['startDate']))
-        return "printed";
+
+        # Put stock analysis method here
+        # put
+        return "STOCKS are inputed";
     else:
         return render_template("InputStocks.html");
 
