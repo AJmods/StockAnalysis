@@ -1,6 +1,5 @@
 from __future__ import print_function
 
-
 # install packages if not installed already
 # !pip install datetime
 # !pip install pandas
@@ -15,6 +14,7 @@ from __future__ import print_function
 import os
 import requests
 import datetime
+from datetime import date
 from dateutil.tz import tzutc
 import json
 import time
@@ -282,30 +282,43 @@ def print_entities(story_x, element_x = None, surface_form_x = None, version_x =
 
 def averageOutSentiments(df):
     score = 0
+    pos = 0
+    neg = 0
+    neu = 0
     divBy = 1
     for row in df.iterrows():
-        #print(row)
+        print(f"row: {row[1]['body_polarity']}: {row[1]['body_polarity_score']}")
         #print(row[1])
         if row[1]["body_polarity"] == "positive":
-            score+=row[1]["body_polarity_score"]
+            pos+=row[1]["body_polarity_score"]
         elif row[1]["body_polarity"] == "negative":
-            score-=row[1]["body_polarity_score"]
+            neg+=row[1]["body_polarity_score"]
         elif row[1]["body_polarity"] == "neutral":
-            divBy+=row[1]["body_polarity_score"] / len(df)
-    print(f"divby: {divBy}")
-    return score / divBy
+            neu+=row[1]["body_polarity_score"] / len(df)
+    print(f"pos: {pos}, neg: {neg}, neu: {divBy}")
+
+    return (pos - neg) / (pos+neg+neu)
         
 def getSentiment(txt, startDate, endDate):
+
+
+    today = datetime.date.today()
+    start_date = date(int(startDate[0:4]), int(startDate[5:7]), int(startDate[8:10]))
+    end_date = date(int(endDate[0:4]), int(endDate[5:7]), int(endDate[8:10]))
+    diffStart = today - start_date
+    diffEnd = today - end_date
+
 
     # define parameters
     params = {
     'language[]': ['en'],
     'title': 'GAMESTOP',
-    'published_at.start':'NOW-2DAYS',
-    'published_at.end':'NOW',
+    'published_at.start':f'NOW-{diffStart.days}DAYS',
+    'published_at.end':f'NOW-{diffEnd.days}DAYS',
     'cursor': '*',
     'per_page' : 50
     }
+    print(params)
 
     stories = get_top_ranked_stories(params, 1)
 

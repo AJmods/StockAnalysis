@@ -8,6 +8,7 @@ import yfinance as yf
 import math
 
 from newsFuncs import getSentiment
+from plotSentiment import plotStocksAndSentiments
 
 app = Flask(__name__)
 
@@ -29,7 +30,7 @@ def stockAnalysis():
 
         # Put stock analysis method here
         sentiment, percentChange = processStockData(ticker, start_date, end_date)
-        return render_template("InputStocks.html", message=f"{ticker} had a {percentChange}% percent change with a sentiment score of {sentiment}");
+        return render_template("InputStocks.html", message=f"{ticker} had a {percentChange}% percent change with a sentiment score of {sentiment}", graph=plotStocksAndSentiments(ticker, start_date, end_date));
     else:
         return render_template("InputStocks.html");
 
